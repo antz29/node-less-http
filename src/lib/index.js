@@ -4,11 +4,23 @@ var http    = require('http'),
     url     = require('url'),
     path    = require('path');
 
-module.exports = function(path_to_less,port) {
+module.exports = function(options) {
+	
+	options = options || {};
+
+	var path_to_less = options.path || process.env.PWD;
+	var port = options.port || 1337;
+	var compress = (options.compress !== undefined) ? options.compress : true;
 
 	http.createServer(function (req, res) {
-	    
+
 	    var uri = url.parse(req.url);
+
+	    if (req.method !== 'GET' || uri.pathname.indexOf('.less') == -1) {
+	        res.writeHead(400, {'Content-Type': 'text/plain'});
+	        res.end('Invalid request. :(');
+	        return; 
+	    }
 
 	    var less_path = path.join(path_to_less,uri.pathname.replace('.css','.less'));
 
@@ -30,17 +42,18 @@ module.exports = function(path_to_less,port) {
 	            return;
 	        }           
 
-	        try {
-	            less.render(less_data, function (e, css) {
+	        try {	        	
+	        	var parser = new(less.Parser)(options);
 
-	                if (e) return handleLessError(e);
-
-	                res.writeHead(200, {'Content-Type': 'text/css'});
-	                res.end(css);
-	            });
+	        	parser.parse(less_data, function (err, tree) {
+	        		if (err) handleLessError(err);
+			    
+			    	res.writeHead(200, {'Content-Type': 'text/css'});
+			    	res.end(tree.toCSS({ compress: compress }));
+				});
 	        }
-	        catch (e) {
-	            return handleLessError(e);
+	        catch (err) {
+	            return handleLessError(err);
 	        }
 
 	    });
