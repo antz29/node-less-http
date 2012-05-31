@@ -1,0 +1,27 @@
+{
+	"author": "John Le Drew <jp@antz29.com> (http://antz29.com)",
+	"name": "less-http",
+	"description": "Simple wrapper for LESS to serve up CSS directly.",
+	"keywords": ["css", "less", "http"],
+	"version": "0.1.0",
+	"homepage": "http://github.com/antz29/node-less-http",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/antz29/node-less-http.git"
+	},
+   	"bugs": {
+        	"email": "less-http-bugs@antz29.com",
+	        "url": "http://github.com/antz29/node-less-http/issues"
+    	},
+	"engines": {
+		"node": ">=0.6.0"
+	},
+	"directories": {
+        	"lib": "./src/lib"
+	},
+	"main" : "./src/lib/index.js",
+	"dependencies": {
+		"less" : "*"
+	},
+	"devDependencies": {}
+}
