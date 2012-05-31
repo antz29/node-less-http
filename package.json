@@ -1,9 +1,9 @@
 {
-	"author": "John Le Drew <jp@antz29.com> (http://antz29.com)",
+	"author": ["John Le Drew <jp@antz29.com> (http://antz29.com)","Barney Hanlon <shrikeh@gmail.com>"],
 	"name": "less-http",
 	"description": "Simple wrapper for LESS to serve up CSS directly.",
 	"keywords": ["css", "less", "http"],
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"homepage": "http://github.com/antz29/node-less-http",
 	"repository": {
 		"type": "git",
