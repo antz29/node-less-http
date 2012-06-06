@@ -16,7 +16,7 @@ module.exports = function(options) {
 
 	    var uri = url.parse(req.url);
 
-	    if (req.method !== 'GET' || uri.pathname.indexOf('.less') == -1) {
+	    if (req.method !== 'GET' || uri.pathname.indexOf('.css') == -1) {
 	        res.writeHead(400, {'Content-Type': 'text/plain'});
 	        res.end('Invalid request. :(');
 	        return; 
